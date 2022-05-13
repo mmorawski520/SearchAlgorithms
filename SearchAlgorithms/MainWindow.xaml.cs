@@ -20,14 +20,37 @@ namespace SearchAlgorithms
     /// </summary>
     public partial class MainWindow : Window
     {
+        int repeats;
+        string textToFind;
+
         public MainWindow()
         {
             InitializeComponent();
         }
-
+        private void initInputData()
+        {
+            textToFind = userWordTextBox.Text;
+            repeats = int.Parse(repeatsTextBox.Text);
+        }
         private void btnBruteForce_Click(object sender, RoutedEventArgs e)
         {
-            resultLabel.Content = "lmfao";
+            initInputData();
+
+        }
+
+        private void btnKmp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBouerMoor_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRabinKarp_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -9,9 +9,9 @@
     <Grid>
         <WrapPanel  Orientation="Horizontal" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" >
             <Button x:Name="btnBruteForce"  Content="Brute Force" HorizontalAlignment="Center"  VerticalAlignment="Top" Padding="15,15,15,15" Click="btnBruteForce_Click" />
-            <Button x:Name="btnKmp" Content="KMP" HorizontalAlignment="Center"  VerticalAlignment="Center" Padding="15,15,15,15"  />
-            <Button x:Name="btnBouerMoor" Content="Bouer-Moore" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="15,15,15,15"  />
-            <Button x:Name="btnRabinKarp" Content="Rabin-Karp" HorizontalAlignment="Center"  VerticalAlignment="Top" Padding="15,15,15,15"  />
+            <Button x:Name="btnKmp" Content="KMP" HorizontalAlignment="Center"  VerticalAlignment="Center" Padding="15,15,15,15" Click="btnKmp_Click"  />
+            <Button x:Name="btnBouerMoor" Content="Bouer-Moore" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="15,15,15,15" Click="btnBouerMoor_Click"  />
+            <Button x:Name="btnRabinKarp" Content="Rabin-Karp" HorizontalAlignment="Center"  VerticalAlignment="Top" Padding="15,15,15,15" Click="btnRabinKarp_Click"  />
         </WrapPanel>
         <WrapPanel  Orientation="Horizontal" Height="200" Margin="0 50" Width="800"   VerticalAlignment="Top" >
             <Button x:Name="btnFileUpload" Content="Select File" Margin="5 5 5 5" HorizontalAlignment="Center"  VerticalAlignment="Center" Padding="10,10,10,10"  />
@@ -20,7 +20,7 @@
         <WrapPanel  Orientation="Horizontal" Height="100" Margin="0 100" Width="800"   VerticalAlignment="Top" >
              
             <TextBox x:Name="userWordTextBox" Width="90" Height="30"/>
-            <TextBox x:Name="amountLoopIndicators" Width="90" Height="30"/>
+            <TextBox x:Name="repeatsTextBox" Width="90" Height="30"/>
         </WrapPanel>
         <StackPanel  Orientation="Vertical" Height="150" Margin="0 150" Width="800"   VerticalAlignment="Top" >
             <Label x:Name="resultLabel" VerticalAlignment="Center"   HorizontalAlignment="Center"  Content="Here will be displayed a result"/>
