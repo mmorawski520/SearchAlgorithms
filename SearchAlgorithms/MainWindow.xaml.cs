@@ -47,7 +47,7 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.bruteForce(textToFind, currentText);
+                Search.bruteForce(textToFind,currentText);
             }
 
             stopwatch.Stop();
@@ -82,7 +82,7 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-
+                Search.boyerMoore(textToFind,currentText);
             }
 
             stopwatch.Stop();
@@ -103,7 +103,7 @@ namespace SearchAlgorithms
             }
 
             stopwatch.Stop();
-            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
+             resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
         }
 
         private void btnFileUpload_Click(object sender, RoutedEventArgs e)
