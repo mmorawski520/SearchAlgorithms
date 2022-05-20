@@ -64,7 +64,7 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.kmp(textToFind,currentText,252);
+                Search.kmp(textToFind,currentText);
             }
 
             stopwatch.Stop();
@@ -99,10 +99,11 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-
+                Search.rabinKarp(textToFind, currentText, 252);
             }
 
             stopwatch.Stop();
+            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
         }
 
         private void btnFileUpload_Click(object sender, RoutedEventArgs e)

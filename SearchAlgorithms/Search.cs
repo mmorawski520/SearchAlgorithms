@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithms
 {
-    public static class Search
+    public  class Search
     {
         const int AMOUNT_OF_LETTERS = 256;
         public static void bruteForce (String pattern, string text)
@@ -30,7 +30,69 @@ namespace SearchAlgorithms
             }
             //doesn't work
         }
-        public static void kmp(String pattern, String text, int pNumber)
+         static int[] getLps(string pattern, int m, int[] lps)
+        {
+            int len = 0;
+            int i = 1;
+            lps[0] = 0;  
+           
+            while (i < m)
+            {
+                if (pattern[i] == pattern[len])
+                {
+                    len++;
+                    lps[i] = len;
+                    i++;
+                }
+                else  
+                {
+                    if (len != 0)
+                    {
+                        len = lps[len - 1];
+                    }
+                    else 
+                    {
+                        lps[i] = len;
+                        i++;
+                    }
+                }
+            }
+            return lps;
+        }
+        public static void kmp(String pattern, String text)
+        {
+            int m = pattern.Length;
+            int n = text.Length;
+
+            int[] lps = new int[m];
+            int j = 0;
+
+            lps=getLps(pattern, m, lps);
+
+
+            int i = 0;
+            while (i < n)
+            {
+                if (pattern[j] == text[i])
+                {
+                    j++;
+                    i++;
+                }
+                if (j == m)
+                {
+                    j = lps[j - 1];
+                }
+
+                if(i<n && pattern[j] != text[i])
+                {
+                    if (j != 0)
+                        j = lps[j - 1];
+                    else
+                        i = i + 1;
+                }
+            }
+        }
+        public static void rabinKarp(String pattern, String text, int pNumber)
         {
             int i, j;
 
