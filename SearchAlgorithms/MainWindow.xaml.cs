@@ -47,10 +47,11 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-
+                Search.bruteForce(textToFind, currentText);
             }
 
             stopwatch.Stop();
+            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
         }
 
         private void btnKmp_Click(object sender, RoutedEventArgs e)

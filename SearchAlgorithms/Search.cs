@@ -9,6 +9,27 @@ namespace SearchAlgorithms
     public static class Search
     {
         const int AMOUNT_OF_LETTERS = 256;
+        public static void bruteForce (String pattern, string text)
+        {
+            int patternLength = pattern.Length;
+            int textLength = text.Length;
+
+            for(int i =0; i < textLength-patternLength; i++)
+            {
+                int j;
+
+                for(j =0; j < patternLength; j++) {
+                    if (text[i+j] != pattern[j])
+                    {
+                        break;
+                    }
+                }
+
+               // if (j == patternLength) return i;
+                //works
+            }
+            //doesn't work
+        }
         public static void kmp(String pattern, String text, int pNumber)
         {
             int i, j;
