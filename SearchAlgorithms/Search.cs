@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchAlgorithms
 {
-    public  class Search
+    public class Search
     {
         const int AMOUNT_OF_LETTERS = 256;
 
-      
+
         public static int[] boyerMoore(string pattern, string text)
         {
             List<int> returnedVal = new List<int>();
@@ -53,33 +50,34 @@ namespace SearchAlgorithms
             for (i = 0; i < size; i++)
                 badChar[(int)str[i]] = i;
         }
-        public static void bruteForce (String pattern, string text)
+        public static void bruteForce(String pattern, string text)
         {
             int patternLength = pattern.Length;
             int textLength = text.Length;
 
-            for(int i =0; i < textLength-patternLength; i++)
+            for (int i = 0; i < textLength - patternLength; i++)
             {
                 int j;
 
-                for(j =0; j < patternLength; j++) {
-                    if (text[i+j] != pattern[j])
+                for (j = 0; j < patternLength; j++)
+                {
+                    if (text[i + j] != pattern[j])
                     {
                         break;
                     }
                 }
 
-               // if (j == patternLength) return i;
+                // if (j == patternLength) return i;
                 //works
             }
             //doesn't work
         }
-         static int[] getLps(string pattern, int m, int[] lps)
+        static int[] getLps(string pattern, int m, int[] lps)
         {
             int len = 0;
             int i = 1;
-            lps[0] = 0;  
-           
+            lps[0] = 0;
+
             while (i < m)
             {
                 if (pattern[i] == pattern[len])
@@ -88,13 +86,13 @@ namespace SearchAlgorithms
                     lps[i] = len;
                     i++;
                 }
-                else  
+                else
                 {
                     if (len != 0)
                     {
                         len = lps[len - 1];
                     }
-                    else 
+                    else
                     {
                         lps[i] = len;
                         i++;
@@ -111,7 +109,7 @@ namespace SearchAlgorithms
             int[] lps = new int[m];
             int j = 0;
 
-            lps=getLps(pattern, m, lps);
+            lps = getLps(pattern, m, lps);
 
 
             int i = 0;
@@ -127,7 +125,7 @@ namespace SearchAlgorithms
                     j = lps[j - 1];
                 }
 
-                if(i<n && pattern[j] != text[i])
+                if (i < n && pattern[j] != text[i])
                 {
                     if (j != 0)
                         j = lps[j - 1];
@@ -146,7 +144,7 @@ namespace SearchAlgorithms
 
             int m = pattern.Length;
             int n = text.Length;
-           
+
             for (i = 0; i < m - 1; i++)
                 h = (h * AMOUNT_OF_LETTERS) % pNumber;
 

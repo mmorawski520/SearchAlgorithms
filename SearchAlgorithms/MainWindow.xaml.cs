@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+﻿using Microsoft.Win32;
 using System.Diagnostics;
-using System.Windows.Shapes;
-using Microsoft.Win32;
-
 using System.IO;
+using System.Windows;
 
 namespace SearchAlgorithms
 {
@@ -31,6 +17,11 @@ namespace SearchAlgorithms
         public MainWindow()
         {
             InitializeComponent();
+
+            currentText = System.IO.File.ReadAllText(
+                System.IO.Path.Combine(System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
+                "staticTextFile.txt")
+                );
         }
         private void initInputData()
         {
@@ -47,7 +38,7 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.bruteForce(textToFind,currentText);
+                Search.bruteForce(textToFind, currentText);
             }
 
             stopwatch.Stop();
@@ -64,7 +55,7 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.kmp(textToFind,currentText);
+                Search.kmp(textToFind, currentText);
             }
 
             stopwatch.Stop();
@@ -82,7 +73,7 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.boyerMoore(textToFind,currentText);
+                Search.boyerMoore(textToFind, currentText);
             }
 
             stopwatch.Stop();
@@ -103,7 +94,7 @@ namespace SearchAlgorithms
             }
 
             stopwatch.Stop();
-             resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
+            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
         }
 
         private void btnFileUpload_Click(object sender, RoutedEventArgs e)
@@ -111,7 +102,7 @@ namespace SearchAlgorithms
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-         
+
             if (openFileDialog.ShowDialog() == true)
             {
                 currentText = File.ReadAllText(openFileDialog.FileName);
