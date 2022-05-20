@@ -9,46 +9,46 @@ namespace SearchAlgorithms
     public static class Search
     {
         const int AMOUNT_OF_LETTERS = 256;
-        public static void RabinKarp(char[] pattern,char[] text,int q) {
-            int M = pattern.Length;
-            int N = text.Length;
+        public static void kmp(String pattern, String text, int pNumber)
+        {
             int i, j;
-            int hashPattern = 0; 
-            int hashText = 0; 
+
+            int patternHash = 0;
+            int textHash = 0;
             int h = 1;
 
-            for(i =0; i < M - 1; i++)
+            int m = pattern.Length;
+            int n = text.Length;
+           
+            for (i = 0; i < m - 1; i++)
+                h = (h * AMOUNT_OF_LETTERS) % pNumber;
+
+            for (i = 0; i < m; i++)
             {
-                h = (h * AMOUNT_OF_LETTERS) % q;
+                patternHash = (AMOUNT_OF_LETTERS * patternHash + pattern[i]) % pNumber;
+                textHash = (AMOUNT_OF_LETTERS * textHash + text[i]) % pNumber;
             }
 
-            for (i =0; i<M; i++) {
-                hashPattern= (AMOUNT_OF_LETTERS * pattern[i]) % q;
-                hashText = (AMOUNT_OF_LETTERS * text[i]) % q;
-            }
-
-            for (i = 0; i <= N - M; i++)
-            { 
-                if(pattern == text)
+            for (i = 0; i <= n - m; i++)
+            {
+                if (patternHash == textHash)
                 {
-                    bool flag = true;
-                    for (j = 0; j < M; j++)
+                    for (j = 0; j < m; j++)
                     {
                         if (text[i + j] != pattern[j])
-                        {
-                            flag = false;
                             break;
-                        }
-                       
                     }
-                    if (j == M) ;
-                }
-                if (i < N - M)
-                {
-                    hashText = (AMOUNT_OF_LETTERS * (hashText - text[i] * h) + text[i + M]) % q;
 
-                    if (hashText < 0)
-                        hashText = (hashText + q);
+                    if (j == m)
+                        Console.WriteLine("Pattern found at index " + i);
+                }
+
+                if (i < n - m)
+                {
+                    textHash = (AMOUNT_OF_LETTERS * (textHash - text[i] * h) + text[i + m]) % pNumber;
+
+                    if (textHash < 0)
+                        textHash = (textHash + pNumber);
                 }
             }
         }

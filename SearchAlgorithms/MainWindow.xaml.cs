@@ -11,7 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Diagnostics;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+
+using System.IO;
 
 namespace SearchAlgorithms
 {
@@ -22,6 +26,7 @@ namespace SearchAlgorithms
     {
         int repeats;
         string textToFind;
+        string currentText;
 
         public MainWindow()
         {
@@ -29,28 +34,86 @@ namespace SearchAlgorithms
         }
         private void initInputData()
         {
-            textToFind = userWordTextBox.Text;
-            repeats = int.Parse(repeatsTextBox.Text);
+            textToFind = userWordTextBox.Text.ToString();
+            repeats = int.Parse(repeatsTextBox.Text.ToString());
         }
         private void btnBruteForce_Click(object sender, RoutedEventArgs e)
         {
             initInputData();
 
+            var stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+
+            for (int i = 0; i < repeats; i++)
+            {
+
+            }
+
+            stopwatch.Stop();
         }
 
         private void btnKmp_Click(object sender, RoutedEventArgs e)
         {
+            initInputData();
+
+            var stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+
+            for (int i = 0; i < repeats; i++)
+            {
+                Search.kmp(textToFind,currentText,252);
+            }
+
+            stopwatch.Stop();
+            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
 
         }
 
         private void btnBouerMoor_Click(object sender, RoutedEventArgs e)
         {
+            initInputData();
 
+            var stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+
+            for (int i = 0; i < repeats; i++)
+            {
+
+            }
+
+            stopwatch.Stop();
+            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
         }
 
         private void btnRabinKarp_Click(object sender, RoutedEventArgs e)
         {
+            initInputData();
 
+            var stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+
+            for (int i = 0; i < repeats; i++)
+            {
+
+            }
+
+            stopwatch.Stop();
+        }
+
+        private void btnFileUpload_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+         
+            if (openFileDialog.ShowDialog() == true)
+            {
+                currentText = File.ReadAllText(openFileDialog.FileName);
+            }
         }
     }
 }

@@ -14,12 +14,13 @@
             <Button x:Name="btnRabinKarp" Content="Rabin-Karp" HorizontalAlignment="Center"  VerticalAlignment="Top" Padding="15,15,15,15" Click="btnRabinKarp_Click"  />
         </WrapPanel>
         <WrapPanel  Orientation="Horizontal" Height="200" Margin="0 50" Width="800"   VerticalAlignment="Top" >
-            <Button x:Name="btnFileUpload" Content="Select File" Margin="5 5 5 5" HorizontalAlignment="Center"  VerticalAlignment="Center" Padding="10,10,10,10"  />
+            <Button x:Name="btnFileUpload" Content="Select File" Margin="5 5 5 5" HorizontalAlignment="Center"  VerticalAlignment="Center" Padding="10,10,10,10" Click="btnFileUpload_Click"  />
             <Label x:Name="fileStatusLabel" Content="Label" Margin="5 5 5 5" HorizontalAlignment="Center"  VerticalAlignment="Center" Padding="10,10,10,10" />
         </WrapPanel>
         <WrapPanel  Orientation="Horizontal" Height="100" Margin="0 100" Width="800"   VerticalAlignment="Top" >
-             
+            <Label Content="Text to find"></Label>
             <TextBox x:Name="userWordTextBox" Width="90" Height="30"/>
+            <Label Content="Amount of repeats"></Label>
             <TextBox x:Name="repeatsTextBox" Width="90" Height="30"/>
         </WrapPanel>
         <StackPanel  Orientation="Vertical" Height="150" Margin="0 150" Width="800"   VerticalAlignment="Top" >
