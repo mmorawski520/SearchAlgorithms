@@ -10,16 +10,17 @@ namespace SearchAlgorithms
     /// </summary>
     public partial class MainWindow : Window
     {
-        int repeats;
-        string textToFind;
+        int repeats = 1;
+        string textToFind = "f";
         string currentText;
+        bool haveFound = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
             currentText = System.IO.File.ReadAllText(
-                System.IO.Path.Combine(System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
+                System.IO.Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
                 "staticTextFile.txt")
                 );
         }
@@ -27,6 +28,13 @@ namespace SearchAlgorithms
         {
             textToFind = userWordTextBox.Text.ToString();
             repeats = int.Parse(repeatsTextBox.Text.ToString());
+        }
+        private void showResult(Stopwatch stopwatch)
+        {
+            if (haveFound)
+                resultLabel.Content = "searching phrase " + stopwatch.ElapsedMilliseconds.ToString() + "s word '" + textToFind + "' had been found";
+            else
+                resultLabel.Content = "searching phrase " + stopwatch.ElapsedMilliseconds.ToString() + "s word '" + textToFind + "' not found";
         }
         private void btnBruteForce_Click(object sender, RoutedEventArgs e)
         {
@@ -38,11 +46,11 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.bruteForce(textToFind, currentText);
+                haveFound = Search.bruteForce(textToFind, currentText);
             }
 
             stopwatch.Stop();
-            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
+            showResult(stopwatch);
         }
 
         private void btnKmp_Click(object sender, RoutedEventArgs e)
@@ -55,11 +63,11 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.kmp(textToFind, currentText);
+                haveFound = Search.kmp(textToFind, currentText);
             }
 
             stopwatch.Stop();
-            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
+            showResult(stopwatch);
 
         }
 
@@ -73,11 +81,11 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.boyerMoore(textToFind, currentText);
+                haveFound = Search.boyerMoore(textToFind, currentText);
             }
 
             stopwatch.Stop();
-            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
+            showResult(stopwatch);
         }
 
         private void btnRabinKarp_Click(object sender, RoutedEventArgs e)
@@ -90,11 +98,11 @@ namespace SearchAlgorithms
 
             for (int i = 0; i < repeats; i++)
             {
-                Search.rabinKarp(textToFind, currentText, 252);
+                haveFound = Search.rabinKarp(textToFind, currentText, 252);
             }
 
             stopwatch.Stop();
-            resultLabel.Content = stopwatch.ElapsedMilliseconds.ToString();
+            showResult(stopwatch);
         }
 
         private void btnFileUpload_Click(object sender, RoutedEventArgs e)

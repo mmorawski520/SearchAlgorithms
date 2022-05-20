@@ -8,37 +8,7 @@ namespace SearchAlgorithms
         const int AMOUNT_OF_LETTERS = 256;
 
 
-        public static int[] boyerMoore(string pattern, string text)
-        {
-            List<int> returnedVal = new List<int>();
-            int m = pattern.Length;
-            int n = text.Length;
 
-            int[] badChar = new int[256];
-
-            BadCharHeuristic(pattern, m, ref badChar);
-
-            int s = 0;
-            while (s <= (n - m))
-            {
-                int j = m - 1;
-
-                while (j >= 0 && pattern[j] == text[s + j])
-                    --j;
-
-                if (j < 0)
-                {
-                    returnedVal.Add(s);
-                    s += (s + m < n) ? m - badChar[text[s + m]] : 1;
-                }
-                else
-                {
-                    s += Math.Max(1, j - badChar[text[s + j]]);
-                }
-            }
-
-            return returnedVal.ToArray();
-        }
 
         private static void BadCharHeuristic(string str, int size, ref int[] badChar)
         {
@@ -50,28 +20,7 @@ namespace SearchAlgorithms
             for (i = 0; i < size; i++)
                 badChar[(int)str[i]] = i;
         }
-        public static void bruteForce(String pattern, string text)
-        {
-            int patternLength = pattern.Length;
-            int textLength = text.Length;
 
-            for (int i = 0; i < textLength - patternLength; i++)
-            {
-                int j;
-
-                for (j = 0; j < patternLength; j++)
-                {
-                    if (text[i + j] != pattern[j])
-                    {
-                        break;
-                    }
-                }
-
-                // if (j == patternLength) return i;
-                //works
-            }
-            //doesn't work
-        }
         static int[] getLps(string pattern, int m, int[] lps)
         {
             int len = 0;
@@ -101,7 +50,64 @@ namespace SearchAlgorithms
             }
             return lps;
         }
-        public static void kmp(String pattern, String text)
+        public static bool boyerMoore(string pattern, string text)
+        {
+            List<int> returnedVal = new List<int>();
+            int m = pattern.Length;
+            int n = text.Length;
+
+            int[] badChar = new int[256];
+
+            BadCharHeuristic(pattern, m, ref badChar);
+
+            int s = 0;
+            while (s <= (n - m))
+            {
+                int j = m - 1;
+
+                while (j >= 0 && pattern[j] == text[s + j])
+                    --j;
+
+                if (j < 0)
+                {
+                    returnedVal.Add(s);
+                    s += (s + m < n) ? m - badChar[text[s + m]] : 1;
+                }
+                else
+                {
+                    s += Math.Max(1, j - badChar[text[s + j]]);
+                }
+            }
+            if (returnedVal.Count > 0)
+                return true;
+            else
+                return false;
+        }
+        public static bool bruteForce(String pattern, string text)
+        {
+            int patternLength = pattern.Length;
+            int textLength = text.Length;
+
+            for (int i = 0; i < textLength - patternLength; i++)
+            {
+                int j;
+
+                for (j = 0; j < patternLength; j++)
+                {
+                    if (text[i + j] != pattern[j])
+                    {
+                        break;
+                    }
+                }
+
+                if (j == patternLength)
+                    return true;
+
+            }
+            return false;
+        }
+
+        public static bool kmp(String pattern, String text)
         {
             int m = pattern.Length;
             int n = text.Length;
@@ -123,6 +129,7 @@ namespace SearchAlgorithms
                 if (j == m)
                 {
                     j = lps[j - 1];
+                    return true;
                 }
 
                 if (i < n && pattern[j] != text[i])
@@ -133,8 +140,9 @@ namespace SearchAlgorithms
                         i = i + 1;
                 }
             }
+            return false;
         }
-        public static void rabinKarp(String pattern, String text, int pNumber)
+        public static bool rabinKarp(String pattern, String text, int pNumber)
         {
             int i, j;
 
@@ -165,7 +173,7 @@ namespace SearchAlgorithms
                     }
 
                     if (j == m)
-                        Console.WriteLine("Pattern found at index " + i);
+                        return true;
                 }
 
                 if (i < n - m)
@@ -176,6 +184,7 @@ namespace SearchAlgorithms
                         textHash = (textHash + pNumber);
                 }
             }
+            return false;
         }
     }
 }
