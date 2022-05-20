@@ -24,6 +24,8 @@ namespace SearchAlgorithms
                 "staticTextFile.txt")
                 );
         }
+
+
         private void initInputData()
         {
             textToFind = userWordTextBox.Text.ToString();
@@ -32,10 +34,11 @@ namespace SearchAlgorithms
         private void showResult(Stopwatch stopwatch)
         {
             if (haveFound)
-                resultLabel.Content = "searching phrase " + stopwatch.ElapsedMilliseconds.ToString() + "s word '" + textToFind + "' had been found";
+                resultLabel.Content = "searching took " + stopwatch.ElapsedMilliseconds.ToString() + "s phrase '" + textToFind + "' had been found";
             else
-                resultLabel.Content = "searching phrase " + stopwatch.ElapsedMilliseconds.ToString() + "s word '" + textToFind + "' not found";
+                resultLabel.Content = "searching toook " + stopwatch.ElapsedMilliseconds.ToString() + "s phrase '" + textToFind + "' not found";
         }
+         
         private void btnBruteForce_Click(object sender, RoutedEventArgs e)
         {
             initInputData();
@@ -115,6 +118,8 @@ namespace SearchAlgorithms
             {
                 currentText = File.ReadAllText(openFileDialog.FileName);
             }
+
+            fileStatusLabel.Content = "File had been uploaded";
         }
     }
 }

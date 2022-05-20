@@ -7,18 +7,15 @@ namespace SearchAlgorithms
     {
         const int AMOUNT_OF_LETTERS = 256;
 
-
-
-
-        private static void BadCharHeuristic(string str, int size, ref int[] badChar)
+        private static void incorrectCharHeuristic(string str, int size, ref int[] incorrectChar)
         {
             int i;
 
             for (i = 0; i < AMOUNT_OF_LETTERS; i++)
-                badChar[i] = -1;
+                incorrectChar[i] = -1;
 
             for (i = 0; i < size; i++)
-                badChar[(int)str[i]] = i;
+                incorrectChar[(int)str[i]] = i;
         }
 
         static int[] getLps(string pattern, int m, int[] lps)
@@ -56,9 +53,9 @@ namespace SearchAlgorithms
             int m = pattern.Length;
             int n = text.Length;
 
-            int[] badChar = new int[256];
+            int[] incorrectChar = new int[256];
 
-            BadCharHeuristic(pattern, m, ref badChar);
+            incorrectCharHeuristic(pattern, m, ref incorrectChar);
 
             int s = 0;
             while (s <= (n - m))
@@ -71,11 +68,11 @@ namespace SearchAlgorithms
                 if (j < 0)
                 {
                     returnedVal.Add(s);
-                    s += (s + m < n) ? m - badChar[text[s + m]] : 1;
+                    s += (s + m < n) ? m - incorrectChar[text[s + m]] : 1;
                 }
                 else
                 {
-                    s += Math.Max(1, j - badChar[text[s + j]]);
+                    s += Math.Max(1, j - incorrectChar[text[s + j]]);
                 }
             }
             if (returnedVal.Count > 0)
